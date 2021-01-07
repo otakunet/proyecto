@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests\CreateMessageRequest;
+
 class PagesController extends Controller
 {
 
-	public function __construct(Request $request){
+    public function __construct(){
+      // no me funciono
+      $this->middleware('example',['except' => ['home'] ] );
 
-  		$this->request = $request;
-
-  	}
+    }
 
   	public function home(){
 
-  		return view('home');
+      return view('home');
+  		//return view('home');
 
   	}
 
@@ -25,9 +28,11 @@ class PagesController extends Controller
 
   	}
 
-  	public function mensajes(){
+  	public function mensajes(CreateMessageRequest $request){
+  		
+      $data = $request->all();
 
-  		return "procesando mensaje...";
+      return redirect()->route('contacto');
 
   	}
 }

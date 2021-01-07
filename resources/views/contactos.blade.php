@@ -1,8 +1,6 @@
 @extends('layout')
 
-
-@section('contenido')
-	
+@section('contenido')	
 
 	<h1>Contactos</h1>
 	
@@ -10,19 +8,27 @@
 
 	<form method="POST" action="contacto">
 
-		<p><label for="nombre">
-			
-			Nombre
+		<!--<input type="hidden" name="_token" value=" {{ csrf_token() }} ">-->
 
-			<input type="text" name="nombre">
+		{!! csrf_field() !!}
+
+		<p><label for="nombre">
+				
+				Nombre
+
+			<input type="text" name="nombre" value="{{ old('nombre') }} ">
+
+			{!! $errors->first('nombre', '<span class="error">:message</span>') !!}
 
 		</label></p>
 
 			<p><label for="email">
 			
-			Email
+				Email
 
-			<input type="email" name="email">
+			<input type="email" name="email" value="{{ old('email') }} ">
+
+			{!! $errors->first('email', '<span class="error">:message</span>') !!}
 
 		</label></p>
 
@@ -30,14 +36,15 @@
 
 			<p><label for="mensaje">
 			
-			Mensaje
+				Mensaje
 
-			<textarea name="mensaje"></textarea>
+			<textarea name="mensaje" value="{{ old('mensaje') }} "></textarea>
+
+			{!! $errors->first('mensaje', '<span class="error">:message</span>') !!}
 
 		</label></p>
 
 		<input type="submit" value="Enviar">
-
 
 	</form>
 
