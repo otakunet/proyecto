@@ -14,3 +14,8 @@ Route::get('saludos/{nombre?} ', ['as' => 'saludos', function ($nombre = 'invita
 
 }]);
 
+Route::get('mensajes', ['as' => 'messages.index', 'uses' => 'MessagesController@index']);
+
+Route::get('mensajes/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+
+Route::post('mensajes', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
