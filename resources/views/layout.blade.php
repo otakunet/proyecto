@@ -41,7 +41,9 @@
 
 			<a class="{{activeMenu('saludos/*')}}" href="{{route('saludos',"jesus")}}">Saludo</a>
 
-			<a class="{{activeMenu('contactame')}}" href="{{route('messages.create')}}">Contacto</a>
+			<a class="{{activeMenu('mensajes/create')}}" href="{{route('messages.create')}}">Contacto</a>
+
+			<a class="{{activeMenu('mensajes')}}" href="{{route('messages.index')}}">Mensajes</a>
 
 		</nav>
 

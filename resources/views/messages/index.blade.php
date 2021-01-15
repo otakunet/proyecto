@@ -6,11 +6,13 @@
 
 <h1>todos los mensajes</h1>
 
-<table>
+<table width="100%" border="1">
 	
 	<thead>
 		
 		<tr>
+
+			<th>id</th>
 			
 			<th>nombre</th>
 
@@ -18,19 +20,54 @@
 
 			<th>mensaje</th>
 
+			<th>Acciones</th>
+
 		</tr>
 
 	</thead>
 
 	<tbody>
 		
-		@foreach( $message as $messages )
+		@foreach( $messages as $message )
+			<tr>
 
-			<td>{{ $messages->nombre }} </td>
+				<td>{{ $message->id }} </td>
 
-			<td>{{ $messages->email }} </td>
+				<td>
 
-			<td>{{$messages->mensaje }} </td>
+					<a href="{{route('messages.show', $message->id)}} ">
+
+						{{ $message->nombre }} 
+
+					</a>	
+
+				</td>
+
+				<td>{{ $message->email }} </td>
+
+				<td>{{$message->mensaje }} </td>
+
+				<td>
+
+					<a href="{{ route('messages.edit', $message->id) }} ">
+
+						Editar
+
+					</a>
+
+					<form style="display: inline;" method="POST" action="{{ route('messages.destroy', $message->id) }}">
+						
+						{!! csrf_field() !!}
+
+						{!! method_field('DELETE') !!}
+
+						<button type="submit">Eliminar</button>
+
+					</form>
+
+				</td>
+
+			</tr>
 
 		@endforeach
 

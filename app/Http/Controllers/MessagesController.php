@@ -17,7 +17,9 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        return view('messages.index');
+        $messages = DB::table('messages')->get();
+
+        return view('messages.index',compact('messages'));
     }
 
     /**
@@ -68,7 +70,10 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $message = DB::table('messages')->where('id', $id)->first();
+
+        return view('messages.show', compact('message'));
     }
 
     /**
@@ -79,7 +84,9 @@ class MessagesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $message = DB::table('messages')->where('id', $id)->first();
+
+        return view('messages.edit', compact('message'));
     }
 
     /**
@@ -91,7 +98,21 @@ class MessagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        DB::table('messages')->where('id', $id)->update([
+
+            "nombre" => $request->input('nombre'),
+
+            "email" => $request->input('email'),
+
+            "mensaje" => $request->input('mensaje'),
+
+            "updated_at" => Carbon::now()
+
+        ]);
+
+        return redirect()->route('messages.index');
+
     }
 
     /**
@@ -102,6 +123,9 @@ class MessagesController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+       DB::table('messages')->where('id', $id)->delete();
+
+       return redirect()->route('messages.index');
+    }   
+
 }

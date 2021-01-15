@@ -35,4 +35,10 @@ class PagesController extends Controller
       return redirect()->route('contacto');
 
   	}
+
+    public function saludos($nombre = 'invitado'){
+
+       return view('saludo', compact('nombre'));
+
+    }
 }
